@@ -10,10 +10,10 @@ def lj_potential(r, eps, sigma):
         
     Returns: float
     """
-    attraction = (sigma / r)**12
-    repulsion = (sigma / r)**6
+    repulsion = (sigma / r)**12
+    attraction = (sigma / r)**6
      
-    return 4 * eps * (attraction - repulsion)
+    return 4 * eps * (repulsion - attraction)
 
 
 
@@ -80,13 +80,16 @@ def total_lj_potential(positions, species, box_length, eps_AA, eps_AB, eps_BB, s
 def gradient_of_lj_potential(r, eps, sigma):
     """
     Args:
-        r (float): 
-        eps (float): 
-        sigma (float): 
-   
+        r (float):
+        eps (float):
+        sigma (float):
+    
     Returns: float
     """
-    return -(4 * eps * ((12 * sigma**12) / r**13 - (6 * sigma**6) / r**7))
+    repulsion_gradient = (12 * sigma**12) / r**13
+    attraction_gradient = (6 * sigma**6) / r**7
+    return -(4 * eps * (repulsion_gradient - attraction_gradient))
+
 
 
 
@@ -119,9 +122,9 @@ def total_lj_potential_gradient(positions, species, box_length, eps_AA, eps_AB, 
         
         Returns: float
         """
-        attraction_gradient = (12 * sigma**12) / r**13
-        repulsion_gradient = (6 * sigma**6) / r**7
-        return -(4 * eps * (attraction_gradient - repulsion_gradient))
+        repulsion_gradient = (12 * sigma**12) / r**13
+        attraction_gradient = (6 * sigma**6) / r**7
+        return -(4 * eps * (repulsion_gradient - attraction_gradient))
 
     
     for i in range(N):
