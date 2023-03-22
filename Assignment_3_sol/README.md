@@ -1,4 +1,6 @@
 
+![](energy_vs_steps_md.png)
+
 ![](md.gif)
 
 Molecular dynamics for 1000 steps -> Question 5:
