@@ -33,8 +33,11 @@ def gradient_descent(positions, species, box_length, eps_AA, eps_AB, eps_BB, sig
         print(np.linalg.norm(grad))
         grad_lis_norm.append(np.linalg.norm(grad))
         new_positions -= step_size * grad# Take a step opposite of the gradient descent
+        new_positions = new_positions % box_length # Apply periodic boundary conditions
         print("Step {} potential energy: {}".format(i+1, total_lj_potential(new_positions, species, box_length, eps_AA, eps_AB, eps_BB, sigma_AA, sigma_AB, sigma_BB, rc)))
         energy_lis.append(total_lj_potential(new_positions, species, box_length, eps_AA, eps_AB, eps_BB, sigma_AA, sigma_AB, sigma_BB, rc))
         i += 1
     
     return new_positions, energy_lis, grad_lis_norm
+
+

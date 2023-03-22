@@ -76,6 +76,7 @@ def velocity_verlet(pos, vel, species, box_length, eps_AA, eps_AB, eps_BB, sigma
     """
     acc = -total_lj_potential_gradient(pos, species, box_length, eps_AA, eps_AB, eps_BB, sigma_AA, sigma_AB, sigma_BB, rc) / 1.0
     pos += vel * dt + 0.5 * acc * dt**2 # full time step
+    pos = pos % box_length # Apply periodic boundary conditions
     vel += 0.5 * acc * dt # half time step
     acc = -total_lj_potential_gradient(pos, species, box_length, eps_AA, eps_AB, eps_BB, sigma_AA, sigma_AB, sigma_BB, rc) / 1.0
     vel += 0.5 * acc * dt # half time step
